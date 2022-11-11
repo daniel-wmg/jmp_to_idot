@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>3. Setup the final reaction volume</h3>
+<small class="text-muted">This is the total volume of each reaction well</small>
+<div class="d-flex">
+    <form class="mx-auto" action="/{{session_id}}/step_3" method="post" enctype="multipart/form-data">
+        <input type="number" name="final_vol" class="form-control" required/>
+
+        <input type="submit" class="btn  btn-primary mt-2"/>
+    </form>
+</div>
+
+{% endblock %}

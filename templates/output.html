@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>4. iDot output</h3>
+Generated pipetting scheme:
+<a class="btn btn-light mx-4" href="/{{session_id}}/download"><i class="fa-solid fa-download"></i>&nbsp;Download</a>
+
+<table class="table">
+    <thead>
+    {% for col in df_cols %}
+    <th>{{col}}</th>
+    {% endfor %}
+    </thead>
+    <tbody>
+
+    {% for row in df %}
+    <tr>
+        {% for col in df_cols %}
+        <td>{{row[col]}}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+
+{% endblock %}

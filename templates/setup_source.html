@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>2. Setup the source liquids</h3>
+<div class="d-flex w-100 mt-3">
+    <form class="mx-auto" action="/{{session_id}}/step_2" method="post">
+
+        {% for liquid in liquids %}
+        <div class="row mb-4">
+            <h5>{{
+                liquid}}</h5>
+            <div class="col">
+                <input type="number" min="1" value="1" name="{{liquid}}_conc" class="form-control" required/>
+                <small>Stock Concentration (mM)</small>
+            </div>
+            <div class="col">
+                <select name="{{liquid}}_well_letter" class="form-control">
+                    {% for letter in well_letters %}
+                    <option value="{{letter}}">{{letter}}</option>
+                    {% endfor %}
+                </select>
+                <small>Stock Well Letter</small>
+            </div>
+            <div class="col">
+                <input type="number" min="1" max="12" name="{{liquid}}_well_number" class="form-control" value="1"
+                       required/>
+                <small>Stock Well Number</small>
+            </div>
+        </div>
+
+        {% endfor %}
+
+        <input type="submit" class="btn  btn-primary mt-1"/>
+    </form>
+</div>
+
+{% endblock %}

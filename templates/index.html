@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>1. Upload the Jump CSV File</h3>
+<div class="d-flex">
+    <form class="mx-auto" action="/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" class="form-control" required/>
+        <input type="submit" class="btn  btn-primary mt-1"/>
+    </form>
+</div>
+
+{% endblock %}

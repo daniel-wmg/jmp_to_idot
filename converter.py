@@ -20,7 +20,9 @@ class Converter:
             self.solutions[col].set_levels(self.input_df[col].cat.categories.to_list(), self.final_vol)
 
     def get_reagents(self):
-        return self.input_df.columns.tolist()
+        liquids = self.input_df.columns.tolist()
+        liquids.append("Water")
+        return liquids
 
     def set_liquid_stocks(self, stocks):
         for i, sol in enumerate(self.solutions):
@@ -67,7 +69,7 @@ class Converter:
 
         output_df["liquid"] = output_df["variable"]
         output_df["variable"] = output_df["variable"].apply(self._get_liquid_source_well)
-        output_df["value"] = output_df["value"] / 10000000
+        output_df["value"] = output_df["value"] / 1000000
         output_df = output_df[output_df["value"] != 0]
         output_df = output_df.rename(
             {"well": "Source Well", "variable": "Target Well", "value": "Volume [L]", "liquid": "Liquid Name"}, axis=1)

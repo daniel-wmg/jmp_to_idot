@@ -12,12 +12,18 @@ class Converter:
         self.parse_input()
 
     def parse_input(self):
+        """
+        Takes in the input from jmp and loads the different solutions
+        :return: None
+        :rtype: None
+        """
         for col in self.input_df.columns:
-            self.input_df[col] = self.input_df[col].astype("category")
             self.input_df[col] = self.input_df[col].astype("category")
 
             self.solutions[col] = Solution(col, 1, "")
             self.solutions[col].set_levels(self.input_df[col].cat.categories.to_list(), self.final_vol)
+
+        print(self.solutions)
 
     def get_reagents(self):
         liquids = self.input_df.columns.tolist()
@@ -55,6 +61,7 @@ class Converter:
         return a
 
     def build_output(self):
+
         output_df = self.input_df.copy()
 
         for col in output_df:
@@ -63,13 +70,14 @@ class Converter:
 
         num_samples = len(output_df)
 
+        print(self.solutions)
         output_df["well"] = self.generate_plate_indices(num_samples)
 
         output_df = pd.melt(output_df, id_vars="well")
 
         output_df["liquid"] = output_df["variable"]
         output_df["variable"] = output_df["variable"].apply(self._get_liquid_source_well)
-        output_df["value"] = output_df["value"] / 1000000
+        output_df["value"] = output_df["value"]
         output_df = output_df[output_df["value"] != 0]
         output_df = output_df.rename(
             {"well": "Source Well", "variable": "Target Well", "value": "Volume [L]", "liquid": "Liquid Name"}, axis=1)
